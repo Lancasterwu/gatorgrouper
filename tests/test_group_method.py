@@ -102,26 +102,31 @@ def test_round_robin():
     assert (["Austin", True, True, True] in actual_output[1]) is True
 
 def test_rrobin_responses():
+    """Testing the grouping function according to responses"""
     list = [
         ["Dan", True, True, True],
         ["Jesse", True, True, True],
         ["Austin", True, True, True],
-        ["Nick", False, False, False],
-        ["Nikki", False, False, False],
-        ["Maria", False, False, False],
-        ["Jeff", False, False, False],
-        ["Simon", False, False, False],
-        ["Jon", False, False, False],
-        ["Angie", False, False, False],
-        ["Izaak", False, False, False],
-        ["Jacob", False, False, False]
+        ["Nick", True, False, False],
+        ["Nikki", True, False, False],
+        ["Maria", True, False, False],
+        ["Jeff", False, True, False],
+        ["Simon", False, True, False],
+        ["Jon", False, True, False],
+        ["Angie", False, False, True],
+        ["Izaak", False, False, True],
+        ["Jacob", False, False, True]
     ]
     group_size = 3
-    list_output = group_rrobin.group_rrobin_num_group(responses, numgrps)
-    assert list_output != 0
-    #1. assert columns are not empty
-    #2. assert responses are empty(groups are formed based on responses)
-    #3. assert there is an average and a regular score
+    response_output = group_rrobin.group_rrobin_num_group(responses, numgrps)
+    assert len(response_output) == 4
+    assert len(responses) == 0
+    assert len(response_output[0]) == group_size
+    assert (["Nick", True, False, False] in response_output[0]) is True
+    assert (["Jeff", False, True, False] in response_output[1]) is True
+    assert (["Angie", False, False, True] in response_output[2]) is True
+
+    # assert there is an average and a regular score?
 
 def test_random():
     """Testing the random grouping function to assure proper output"""
